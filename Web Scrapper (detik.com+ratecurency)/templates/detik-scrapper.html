@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Detik Scrapper</h2>
+      <p>This is the popular news on Detik.com</p>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <td>Gambar</td>
+            <td>Judul</td>
+          </tr>
+        </thead>
+        <tbody>
+        {% for image in images %}
+            <tr>
+                <td>{{ image|safe }}</td>
+                <td><a href="{{ image.find('a').find('img')['title'] }}">{{ image.find('a').find('img')['title']|safe }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}

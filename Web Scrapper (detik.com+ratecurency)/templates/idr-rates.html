@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+      <h2>IDR Rates</h2>
+      <p>This is the latest IDR Currency Rates</p>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <td>Code</td>
+            <td>Date</td>
+            <td>Name</td>
+              <td>Rates</td>
+          </tr>
+        </thead>
+        <tbody>
+        {% for data in datas %}
+            <tr>
+                <td>{{ data['code'] }}</td>
+                <td>{{ data['date'] }}</td>
+                <td>{{ data['name'] }}</td>
+                <td>{{ data['inverseRate'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}
