@@ -1,5 +1,5 @@
-from pip._vendor import requests
-from pip._vendor.requests import get
+import requests
+import json
 
 #json_data = requests.get('http://floatrates.com/daily/idr.json')
 

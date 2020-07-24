@@ -1,4 +1,4 @@
-from pip._vendor.requests import get
+import requests
 import json
 
 url = 'https://www.instagram.com/graphql/query/'
@@ -12,7 +12,7 @@ params = {
     'variables': json.dumps(varibles)
 }
 
-r = get(url, params=params).json()
+r = requests.get(url, params=params).json()
 
 users = r['data']['shortcode_media']['edge_liked_by']['edges']
 

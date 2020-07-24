@@ -1,4 +1,4 @@
-from pip._vendor.requests import get
+import requests
 import json
 import time
 
@@ -21,7 +21,7 @@ while 1:
         'variables': json.dumps(varibles)
     }
 
-    r = get(url, params=params).json()
+    r = requests.get(url, params=params).json()
 
     try: users = r['data']['shortcode_media']['edge_liked_by']['edges']
     except:

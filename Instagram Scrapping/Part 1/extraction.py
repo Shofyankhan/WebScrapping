@@ -1,5 +1,6 @@
-from pip._vendor.requests import get
+import requests
 import json, time, csv
+from os.path import dirname, join
 
 url = 'https://www.instagram.com/graphql/query/'
 
@@ -13,7 +14,10 @@ counterfile = 1
 
 jumlah_per_file = 1000
 
-writer = csv.writer(open('hasil_like/{} {}.csv.'.format(short_code, counterfile), 'w', newline=''))
+current_dir = dirname(__file__)
+file_path = join(current_dir, "./hasil_like/")
+
+writer = csv.writer(open('{}{} {}.csv'.format(file_path, short_code, counterfile), 'w', newline=''))
 headers = ['User Name', 'Full Name', 'Profile Pic']
 writer.writerow(headers)
 while 1:
@@ -28,7 +32,7 @@ while 1:
         'variables': json.dumps(varibles)
     }
 
-    r = get(url, params=params).json()
+    r = requests.get(url, params=params).json()
 
     try: users = r['data']['shortcode_media']['edge_liked_by']['edges']
     except:
@@ -39,7 +43,7 @@ while 1:
     for user in users:
         if count % jumlah_per_file == 0 and count!=0:
             counterfile +=1
-            writer = csv.writer(open('hasil_like/{} {}.csv.'.format(short_code, counterfile), 'w', newline=''))
+            writer = csv.writer(open('{}{} {}.csv'.format(file_path, short_code, counterfile), 'w', newline=''))
             headers = ['User Name', 'Full Name', 'Profile Pic']
             writer.writerow(headers)
         username = user['node']['username']
@@ -47,7 +51,7 @@ while 1:
         profile_pic = user['node']['profile_pic_url']
         count +=1
         print(f'{count} || {username} || {fullname} || {profile_pic}')
-        writer = csv.writer(open('hasil_like/{} {}.csv.'.format(short_code, counterfile), 'a', newline='', encoding='utf-8'))
+        writer = csv.writer(open('{}{} {}.csv'.format(file_path, short_code, counterfile), 'a', newline='', encoding="utf-8"))
         data = [username, fullname, profile_pic]
         writer.writerow(data)
 

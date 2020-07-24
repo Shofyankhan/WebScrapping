@@ -1,7 +1,7 @@
 import bs4
-from pip._vendor.requests import get
+import requests 
 
-html_doc = get('https://detik.com/terpopuler', params={'tag_from': 'wp_cb_mostPopular_more'})
+html_doc = requests.get('https://detik.com/terpopuler', params={'tag_from': 'wp_cb_mostPopular_more'})
 
 soup = bs4.BeautifulSoup(html_doc.text, 'html.parser')
 
