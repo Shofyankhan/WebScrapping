@@ -4,7 +4,7 @@ here are some basic web scrapping,
 
 Folder 1 :
 - Web detik.com
-- Api from currency
+- API currency from floatrates.com
 
 Folder 2 :
 - Instagram Scrapping
